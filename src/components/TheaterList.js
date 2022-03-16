@@ -9,7 +9,7 @@ function TheaterList() {
 
   return (
     <div>
-      
+      <p>TEXT</p>
     </div>
   );
 }
