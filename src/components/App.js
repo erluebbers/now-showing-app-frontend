@@ -1,6 +1,9 @@
-import './App.css';
-import MovieForm from './MovieForm'
-import
+import '../App.css';
+import React from "react";
+import Intro from "./Intro"
+import TheaterForm from "./TheaterForm";
+import MovieForm from "./MovieForm";
+
 
 function App() {
 
@@ -8,8 +11,10 @@ function App() {
 
 
   return (
-    <div className="App">
-      
+    <div>
+      <Intro />
+      <TheaterForm />
+      <MovieForm />
     </div>
   );
 }

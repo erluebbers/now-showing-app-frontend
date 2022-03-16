@@ -1,4 +1,4 @@
-import './App.css';
+import '../App.css';
 import React from "react";
 
 
@@ -8,7 +8,7 @@ function MovieForm() {
 
 
   return (
-    <div>
+    <div className="form-box">
       
     </div>
   );
