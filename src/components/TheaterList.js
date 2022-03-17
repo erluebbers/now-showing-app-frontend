@@ -1,15 +1,16 @@
 import '../App.css';
 import React from "react";
+import TheaterCard from "./TheaterCard"
 
+function TheaterList( {theaterDisplay} ) {
 
-function TheaterList() {
-
-
-
+  const moviesByTheater = theaterDisplay.map(movie => {
+        return <TheaterCard movie={movie} key={movie.id}/>
+      })
 
   return (
     <div>
-      <p>TEXT</p>
+      {moviesByTheater}
     </div>
   );
 }
