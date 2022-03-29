@@ -26,7 +26,7 @@ function MovieSelect( {handleBrokenScreen}) {
     <div className="form-box">
         <h3>Find by Movie:</h3>
         <select name="theater" onChange={handleChange}>
-        <option value="Select Theater">Select Theater</option>
+        <option value="Select Theater">Select Movie</option>
           {dropdownSelects}
         </select>
         <MovieList movieDisplay={movieDisplay} handleBrokenScreen={handleBrokenScreen}/>
