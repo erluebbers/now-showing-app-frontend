@@ -6,7 +6,8 @@ function Intro( {theaterInfo, handleClosure} ) {
   const [formData, setFormData] = useState({
     name: "",
     opening_date: 2022,
-    rating: ""
+    rating: "",
+    theater_id: null
   })
 
   const theaterList = theaterInfo.map(theater => {
@@ -24,6 +25,8 @@ function Intro( {theaterInfo, handleClosure} ) {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(formData)
     })
+    .then(r => r.json())
+    .then(data => console.log(data))
   }
 
   const handleChange = (event) => {
@@ -60,6 +63,13 @@ function Intro( {theaterInfo, handleClosure} ) {
           <option value="PG-13">PG-13</option>
           <option value="PG">PG</option>
           <option value="G">G</option>
+        </select>
+        <select onChange={handleChange} name="theater_id">
+        <option value="Select Theater">Select Theater</option>
+          <option value="1">Seattle Downtown Multiplex</option>
+          <option value="2">Seattle Uptown Monoplex</option>
+          <option value="3">Regal 15</option>
+          <option value="4">AMC Madison Park</option>
         </select>
         <button type="submit">Submit</button>
       </form>
