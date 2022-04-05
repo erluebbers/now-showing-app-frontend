@@ -18,6 +18,10 @@ function Intro( {theaterInfo, handleClosure} ) {
       </div>)
   })
 
+  const theaterDropdown = theaterInfo.map(theater => {
+    return <option value={theater.id}>{theater.name}</option>
+  })
+
   const handleCreate = (event) => {
     event.preventDefault()
     fetch(`http://localhost:9292/movies`, {
@@ -58,18 +62,15 @@ function Intro( {theaterInfo, handleClosure} ) {
           value={formData.name}
         />
         <select onChange={handleChange} name="rating">
-          <option value="NC-17">NC-17</option>
+          <option value="rating">Select Rating</option>
           <option value="R">R</option>
           <option value="PG-13">PG-13</option>
           <option value="PG">PG</option>
           <option value="G">G</option>
         </select>
         <select onChange={handleChange} name="theater_id">
-        <option value="Select Theater">Select Theater</option>
-          <option value="1">Seattle Downtown Multiplex</option>
-          <option value="2">Seattle Uptown Monoplex</option>
-          <option value="3">Regal 15</option>
-          <option value="4">AMC Madison Park</option>
+          <option value="Select Theater">Select Theater</option>
+          {theaterDropdown}
         </select>
         <button type="submit">Submit</button>
       </form>
