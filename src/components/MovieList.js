@@ -3,15 +3,15 @@ import React from "react";
 import MovieCard from "./MovieCard"
 
 
-function MovieList( {movieDisplay, handleBrokenScreen} ) {
+function MovieList( {movieDisplay} ) {
 
-  const theatersbyMovie = movieDisplay.map(theater => {
-    return <MovieCard theater={theater} key={theater.id} handleBrokenScreen={handleBrokenScreen}/>
+  const theatersByMovie = movieDisplay.map(theater => {
+    return <MovieCard theater={theater} key={theater.id}/>
   })
 
 return (
   <div>
-    {theatersbyMovie}
+    {theatersByMovie}
   </div>
   );
 }

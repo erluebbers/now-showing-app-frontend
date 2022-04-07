@@ -3,22 +3,15 @@ import React, { useState, useEffect } from "react";
 import MovieList from "./MovieList"
 
 
-function MovieSelect( {handleBrokenScreen}) {
-  const [movieInfo, setMovieInfo] = useState([])
+function MovieSelect( {movieInfo}) {
   const [movieDisplay, setMovieDisplay] = useState([])
-
-  useEffect(() => {
-    fetch("http://localhost:9292/movies")
-      .then(r => r.json())
-      .then(data => setMovieInfo(data))
-  }, [])
 
   const handleChange = (e) => {
     const movie = movieInfo.find(movie => movie.id === parseInt(e.target.value))
     setMovieDisplay(movie.theaters)
   }
 
-  const dropdownSelects = movieInfo.map(movie => {
+  const movieDropdown = movieInfo.map(movie => {
     return <option value={movie.id} key={movie.id}>{movie.name}</option>
   })
 
@@ -27,9 +20,9 @@ function MovieSelect( {handleBrokenScreen}) {
         <h3>Find by Movie:</h3>
         <select name="theater" onChange={handleChange}>
         <option value="Select Theater">Select Movie</option>
-          {dropdownSelects}
+          {movieDropdown}
         </select>
-        <MovieList movieDisplay={movieDisplay} handleBrokenScreen={handleBrokenScreen}/>
+        <MovieList movieDisplay={movieDisplay}/>
     </div>
   );
 }

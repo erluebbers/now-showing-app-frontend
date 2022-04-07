@@ -2,27 +2,25 @@ import '../App.css';
 import React, { useState } from "react";
 
 
-function Intro( {theaterInfo, handleClosure} ) {
-  const [formData, setFormData] = useState({
-    name: "",
-    opening_date: 2022,
-    rating: "",
-    theater_id: null
-  })
+function Intro( {theaterInfo, handleClosure, theaterDropdown, onAddMovie} ) {
+  const initialState = {
+      name: "",
+      opening_date: 2022,
+      rating: "",
+      theater_id: null
+    }
+  
+  const [formData, setFormData] = useState(initialState)
 
-  const theaterList = theaterInfo.map(theater => {
+  const theaterClosureList = theaterInfo.map(theater => {
     return (
       <div key={theater.id}>
-        <li>{theater.name}</li> 
+        <li>{theater.name}: {theater.location}</li> 
         <button onClick={() => handleClosure(theater)}>Report Closure</button>
       </div>)
   })
 
-  const theaterDropdown = theaterInfo.map(theater => {
-    return <option value={theater.id}>{theater.name}</option>
-  })
-
-  const handleCreate = (event) => {
+  const handleCreateMovie = (event) => {
     event.preventDefault()
     fetch(`http://localhost:9292/movies`, {
       method: "POST",
@@ -30,7 +28,11 @@ function Intro( {theaterInfo, handleClosure} ) {
       body: JSON.stringify(formData)
     })
     .then(r => r.json())
-    .then(data => console.log(data))
+    .then(movie => {
+      onAddMovie(movie)
+      setFormData(initialState)
+    })
+    event.target.reset()
   }
 
   const handleChange = (event) => {
@@ -42,27 +44,26 @@ function Intro( {theaterInfo, handleClosure} ) {
     })
   }
 
-  console.log(formData)
-
-
   return (
     <div className="intro">
       <h1>Now Showing App</h1>
       <h2>What movies are playing now in the major Movie Theaters of Seattle</h2>
       <p>Choose whether to find the right movie by exploring by Theater or by Movie. Check below to make sure your chosen theater is open and report closures below</p>
       <ul>
-        {theaterList}
+        {theaterClosureList}
       </ul>
       <h3>Have you noticed a new movie playing at one of our local theaters? Report it using the below form to keep other users updated!</h3>
-      <form onSubmit={handleCreate}>
+      <form onSubmit={handleCreateMovie} id="new_movie">
         <input 
           type="text"
           name="name"
+          placeholder="Enter Movie Title..."
           onChange={handleChange}
           value={formData.name}
         />
         <select onChange={handleChange} name="rating">
           <option value="rating">Select Rating</option>
+          <option value="NR">NR</option>
           <option value="R">R</option>
           <option value="PG-13">PG-13</option>
           <option value="PG">PG</option>
