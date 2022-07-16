@@ -52,7 +52,7 @@ function Intro( {theaterInfo, handleClosure, theaterDropdown, onAddMovie} ) {
       <ul>
         {theaterClosureList}
       </ul>
-      <h3>Have you noticed a new movie playing at one of our local theaters? Report it using the below form to keep other users updated!</h3>
+      <h3>Is there a new movie playing at one of our local theaters? Report it using the below form to keep other users updated!</h3>
       <form onSubmit={handleCreateMovie} id="new_movie">
         <input 
           type="text"
